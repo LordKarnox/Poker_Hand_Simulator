@@ -8,13 +8,21 @@ each hand's rank, track chips and statistics across rounds, and keep
 running until the user chooses to quit.
 """
 
+import random
+
 SUITS = ('♠', '♥', '♦', '♣')
 RANKS = ('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A')
+HAND_SIZE = 5
 
 deck = []
 for suit in SUITS:
     for rank in RANKS:
         deck.append(rank + suit)
 
-print(f"The deck has {len(deck)} cards:")
-print(deck)
+random.shuffle(deck)
+hand = deck[:HAND_SIZE]
+
+hand_text = ''
+for card in hand:
+    hand_text += card + '  '
+print(f"Your hand: {hand_text}")
