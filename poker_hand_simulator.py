@@ -22,7 +22,25 @@ for suit in SUITS:
 random.shuffle(deck)
 hand = deck[:HAND_SIZE]
 
+rank_counts = {}
+for card in hand:
+    rank = card[:-1]
+    rank_counts[rank] = rank_counts.get(rank, 0) + 1
+match_counts = sorted(rank_counts.values(), reverse=True)
+
+if match_counts[0] == 4:
+    hand_rank = 'Four of a Kind'
+elif match_counts[0] == 3:
+    hand_rank = 'Three of a Kind'
+elif match_counts[:2] == [2, 2]:
+    hand_rank = 'Two Pair'
+elif match_counts[0] == 2:
+    hand_rank = 'Pair'
+else:
+    hand_rank = 'High Card'
+
 hand_text = ''
 for card in hand:
     hand_text += card + '  '
 print(f"Your hand: {hand_text}")
+print(f"Result: {hand_rank}")
